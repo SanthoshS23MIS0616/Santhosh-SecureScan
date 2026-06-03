@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Santhosh SecureScan | Vulnerability Scanner</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="ambient" aria-hidden="true">
+    <span class="beam beam-one"></span>
+    <span class="beam beam-two"></span>
+    <span class="beam beam-three"></span>
+    <span class="grid-glow"></span>
+  </div>
+
+  <main class="shell">
+    <section class="workspace">
+      <aside class="command-panel slide-in">
+        <div class="brand-row">
+          <div class="brand-mark">SS</div>
+          <div>
+            <p class="eyebrow">Security Mini Project</p>
+            <h1>Santhosh SecureScan</h1>
+          </div>
+        </div>
+
+        <form id="scanForm" class="scan-form">
+          <label class="field">
+            <span>Target</span>
+            <input id="targetInput" name="target" type="text" value="http://127.0.0.1:8000" autocomplete="off" required />
+          </label>
+
+          <div class="field">
+            <span>Port Profile</span>
+            <div class="segments" role="radiogroup" aria-label="Port profile">
+              <label><input type="radio" name="profile" value="quick" checked /><span>Quick</span></label>
+              <label><input type="radio" name="profile" value="web" /><span>Web</span></label>
+              <label><input type="radio" name="profile" value="extended" /><span>Extended</span></label>
+            </div>
+          </div>
+
+          <label class="field">
+            <span>Custom Ports</span>
+            <input id="portsInput" name="customPorts" type="text" placeholder="80,443,8000-8010" autocomplete="off" />
+          </label>
+
+          <button class="scan-button" type="submit">
+            <span class="button-pulse"></span>
+            <span>Run Scan</span>
+          </button>
+        </form>
+
+        <div class="status-card">
+          <div class="status-orbit"></div>
+          <p id="scanStatus">Ready</p>
+          <strong id="statusTarget">Awaiting target</strong>
+        </div>
+      </aside>
+
+      <section class="dashboard">
+        <div class="topline slide-in delay-1">
+          <div>
+            <p class="eyebrow">Assessment Console</p>
+            <h2>Vulnerability Report</h2>
+          </div>
+          <div class="actions">
+            <button id="downloadMarkdown" class="ghost-button" type="button" disabled>Markdown</button>
+            <button id="downloadJson" class="ghost-button" type="button" disabled>JSON</button>
+          </div>
+        </div>
+
+        <div class="metrics slide-in delay-2">
+          <article class="metric">
+            <span>Risk Score</span>
+            <strong id="riskScore">--</strong>
+            <small id="riskLabel">No scan yet</small>
+          </article>
+          <article class="metric">
+            <span>Open Ports</span>
+            <strong id="openPorts">--</strong>
+            <small id="closedPorts">Closed: --</small>
+          </article>
+          <article class="metric">
+            <span>Findings</span>
+            <strong id="findingCount">--</strong>
+            <small id="duration">Duration: --</small>
+          </article>
+        </div>
+
+        <div id="loader" class="loader hidden">
+          <div class="loader-line"></div>
+          <div class="loader-steps">
+            <span>Resolve</span>
+            <span>Ports</span>
+            <span>Headers</span>
+            <span>Report</span>
+          </div>
+        </div>
+
+        <section class="result-grid">
+          <article class="panel slide-in delay-3">
+            <div class="panel-title">
+              <h3>Findings</h3>
+              <span id="severityPills" class="pill-row"></span>
+            </div>
+            <div id="findingsList" class="findings empty-state">Run a scan to populate findings.</div>
+          </article>
+
+          <article class="panel slide-in delay-4">
+            <div class="panel-title">
+              <h3>Open Ports</h3>
+              <span id="scopeBadge" class="badge">Scope</span>
+            </div>
+            <div id="portsList" class="ports empty-state">No port data yet.</div>
+          </article>
+        </section>
+
+        <section class="panel report-panel slide-in delay-5">
+          <div class="panel-title">
+            <h3>Report Preview</h3>
+            <span id="generatedAt" class="badge">Not generated</span>
+          </div>
+          <pre id="reportPreview">The generated report will appear here.</pre>
+        </section>
+      </section>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
+
+
